@@ -6,10 +6,14 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r}
 list.files("../data")
+```
+```{r}
+library(tidyverse)
+library(ggplot2)
 ```
 
