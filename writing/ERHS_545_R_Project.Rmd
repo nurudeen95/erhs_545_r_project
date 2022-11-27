@@ -6,14 +6,31 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(lubridate)
+library(forcats)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r}
 list.files("../data")
 ```
-```{r}
-library(tidyverse)
-library(ggplot2)
+```{r data}
+setwd("C:/Users/nurud/OneDrive/Desktop/Ph.D. Classes/ERHS581A3 R Programming for Research I/EHRS 545 R Project/EHRS 545 R Project/data")
+homicide <- read.csv("homicide-data.csv")
+baltimore_homicide <- homicide %>% 
+  filter(city == "Baltimore") %>% 
+  mutate(reported_date = ymd(reported_date),
+         year = year(reported_date),
+         month = month(reported_date),
+         month_name = as_factor(month),
+         month_name = fct_recode(month_name, Jan = "1", Feb = "2", Mar = "3", Apr = "4",
+                                    May = "5", Jun = "6", Jul = "7", Aug = "8",
+                                    Sep = "9", Oct = "10", Nov = "11", Dec = "12"),
+         period = case_when(month >= 5 & month <= 10 ~ "Summer",
+                            month < 5 ~ "Winter",
+                            month > 10 ~ "Winter")) %>% 
+  select(2, 3, 4, 13, 14, 15, 16)
 ```
 
