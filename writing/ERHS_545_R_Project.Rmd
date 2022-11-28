@@ -2,7 +2,9 @@
 title: "ERHS 545 R project"
 author: "Nurudeen Oketade"
 date: '2022-11-14'
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -49,14 +51,16 @@ freddie_grey <- baltimore_homicide %>%
 
 ```{r plot, fig.dim= c(15, 5)}
 ggplot()+
-  geom_histogram(data = baltimore_homicide_summ,
+  geom_bar(data = baltimore_homicide_summ,
                  aes(x = date, weight = count, fill = period), 
                  bins = 132, binwidth = 17)+
+  geom_smooth(data = baltimore_homicide_summ,aes(x = date, y = count), colour="dodgerblue1", 
+              span = 0.1, se = FALSE, size = 2)+
   theme_dark(base_size = 15)+
   scale_fill_manual(name = " ", values = c("Winter" = "slategray1",
                                "Summer" = "gray87"))+
   annotate("text", x = freddie_grey$date, y = 40, label = "Arrest \n of \n Freddie Gray",
-           col = "white", hjust = 1.1)+
+           col = "white", hjust = 1.1, size = 5)+
   geom_vline(xintercept = freddie_grey$date, color = "red", linetype = "longdash",
              size = 2)+
   theme(legend.position = "bottom")+
