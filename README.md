@@ -28,3 +28,10 @@ baltimore_homicide_summ <- baltimore_homicide %>%
                             month < 5 ~ "Winter",
                             month > 10 ~ "Winter"),
          season = fct_relevel(season, c("Summer", "Winter")))
+
+##freddie gray         
+freddie_grey <- baltimore_homicide %>% 
+  filter(victim_last == "GREY") %>% 
+  unite(col = date, c(year, month), sep = "-",
+        remove = FALSE) %>% 
+  mutate(date = ym(date))
