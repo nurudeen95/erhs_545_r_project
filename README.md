@@ -16,3 +16,15 @@ baltimore_homicide <- homicide %>%
   mutate(reported_date = ymd(reported_date),
          year = year(reported_date),
          month = month(reported_date))
+
+##summarizing data       
+baltimore_homicide_summ <- baltimore_homicide %>% 
+  group_by(year, month) %>% 
+  summarize(count = n()) %>% 
+  unite(col = date, c(year, month), sep = "-",
+        remove = FALSE) %>% 
+  mutate(date = ym(date),
+         season = case_when(month >= 5 & month <= 10 ~ "Summer",
+                            month < 5 ~ "Winter",
+                            month > 10 ~ "Winter"),
+         season = fct_relevel(season, c("Summer", "Winter")))
