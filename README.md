@@ -53,3 +53,22 @@ ggplot()+
   labs(title = "Homicides in Baltimore, MD")+
   xlab("Date")+
   ylab("Monthly Homicides")
+  
+  ##plot
+  ggplot()+
+  geom_bar(data = baltimore_homicide_summ,
+                 aes(x = date, weight = count, fill = season), 
+                 bins = 132, binwidth = 17)+
+  geom_smooth(data = baltimore_homicide_summ,aes(x = date, y = count), colour="dodgerblue1", 
+              span = 0.15, se = FALSE, size = 2)+
+  theme_dark(base_size = 15)+
+  scale_fill_manual(name = " ", values = c("Winter" = "slategray1",
+                               "Summer" = "gray87"))+
+  annotate("text", x = freddie_grey$date, y = 40, label = "Arrest of \n Freddie Gray",
+           col = "white", hjust = 1.1, size = 6)+
+  geom_vline(xintercept = freddie_grey$date, color = "red", linetype = "longdash",
+             size = 2)+
+  theme(legend.position = "bottom")+
+  labs(title = "Homicides in Baltimore, MD")+
+  xlab("Date")+
+  ylab("Monthly Homicides")
