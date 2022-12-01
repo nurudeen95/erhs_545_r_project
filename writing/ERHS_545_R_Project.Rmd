@@ -57,7 +57,7 @@ ggplot()+
   geom_smooth(data = baltimore_homicide_summ,aes(x = date, y = count), colour="dodgerblue1", 
               span = 0.15, se = FALSE, size = 2)+
   theme_dark(base_size = 15)+
-  scale_fill_manual(name = " ", values = c("Winter" = "slategray1",
+  scale_fill_manual(name = " ", values = c("Winter" = "slategray2",
                                "Summer" = "gray87"))+
   annotate("text", x = freddie_grey$date, y = 40, label = "Arrest of \n Freddie Gray",
            col = "white", hjust = 1.1, size = 6)+
