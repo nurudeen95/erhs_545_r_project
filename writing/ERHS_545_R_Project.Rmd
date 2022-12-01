@@ -26,7 +26,7 @@ baltimore_homicide <- homicide %>%
          month = month(reported_date))
 ```
 
-```{r stats}
+```{r summary_table}
 baltimore_homicide_summ <- baltimore_homicide %>% 
   group_by(year, month) %>% 
   summarize(count = n()) %>% 
