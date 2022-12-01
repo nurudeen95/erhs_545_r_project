@@ -58,7 +58,7 @@ ggplot()+
               span = 0.15, se = FALSE, size = 2)+
   theme_dark(base_size = 15)+
   scale_fill_manual(name = " ", values = c("Winter" = "slategray1",
-                               "Summer" = "gray88"))+
+                               "Summer" = "gray87"))+
   annotate("text", x = freddie_grey$date, y = 40, label = "Arrest of \n Freddie Gray",
            col = "white", hjust = 1.1, size = 6)+
   geom_vline(xintercept = freddie_grey$date, color = "red", linetype = "longdash",
