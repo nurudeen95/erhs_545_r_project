@@ -39,6 +39,7 @@ baltimore_homicide_summ <- baltimore_homicide %>%
          season = fct_relevel(season, c("Summer", "Winter")))
 ```
 
+
 ```{r freddie_grey}
 freddie_grey <- baltimore_homicide %>% 
   filter(victim_last == "GREY") %>% 
