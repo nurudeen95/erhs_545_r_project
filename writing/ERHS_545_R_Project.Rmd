@@ -49,7 +49,7 @@ freddie_grey <- baltimore_homicide %>%
 ```
 
 
-```{r plot, fig.dim= c(15, 10)}
+```{r plot, fig.dim= c(15, 8)}
 ggplot()+
   geom_bar(data = baltimore_homicide_summ,
                  aes(x = date, weight = count, fill = period), 
