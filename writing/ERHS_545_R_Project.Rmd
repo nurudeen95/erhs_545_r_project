@@ -12,13 +12,11 @@ library(tidyverse)
 library(ggplot2)
 library(lubridate)
 library(forcats)
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-```{r}
-list.files("../data")
-```
 ```{r data}
+list.files("../data")
 setwd("C:/Users/nurud/OneDrive/Desktop/Ph.D. Classes/ERHS581A3 R Programming for Research I/EHRS 545 R Project/EHRS 545 R Project/data")
 homicide <- read.csv("homicide-data.csv")
 baltimore_homicide <- homicide %>% 
@@ -35,9 +33,10 @@ baltimore_homicide_summ <- baltimore_homicide %>%
   unite(col = date, c(year, month), sep = "-",
         remove = FALSE) %>% 
   mutate(date = ym(date),
-         period = case_when(month >= 5 & month <= 10 ~ "Summer",
+         season = case_when(month >= 5 & month <= 10 ~ "Summer",
                             month < 5 ~ "Winter",
-                            month > 10 ~ "Winter"))
+                            month > 10 ~ "Winter"),
+         season = fct_relevel(season, c("Summer", "Winter")))
 ```
 
 ```{r freddie_grey}
@@ -55,12 +54,12 @@ ggplot()+
                  aes(x = date, weight = count, fill = period), 
                  bins = 132, binwidth = 17)+
   geom_smooth(data = baltimore_homicide_summ,aes(x = date, y = count), colour="dodgerblue1", 
-              span = 0.1, se = FALSE, size = 2)+
+              span = 0.15, se = FALSE, size = 2)+
   theme_dark(base_size = 15)+
   scale_fill_manual(name = " ", values = c("Winter" = "slategray1",
                                "Summer" = "gray87"))+
-  annotate("text", x = freddie_grey$date, y = 40, label = "Arrest \n of \n Freddie Gray",
-           col = "white", hjust = 1.1, size = 5)+
+  annotate("text", x = freddie_grey$date, y = 40, label = "Arrest of \n Freddie Gray",
+           col = "white", hjust = 1.1, size = 6)+
   geom_vline(xintercept = freddie_grey$date, color = "red", linetype = "longdash",
              size = 2)+
   theme(legend.position = "bottom")+
@@ -68,4 +67,5 @@ ggplot()+
   xlab("Date")+
   ylab("Monthly Homicides")
 ```
+
 
